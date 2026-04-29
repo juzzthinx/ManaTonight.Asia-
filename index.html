@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ManaTonight — KL</title>
+
+<style>
+
+/* --- Base Style --- */
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #111;
+
+    color: #f5f5f5;
+
+}
+
+/* --- Age Gate --- */
+
+#ageGate {
+
+    position: fixed;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: #111;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    z-index: 999;
+
+}
+
+button {
+
+    padding: 14px 28px;
+
+    border: none;
+
+    background: #00ff88;
+
+    color: black;
+
+    font-weight: bold;
+
+    margin-top: 20px;
+
+}
+
+/* --- Header --- */
+
+.header {
+
+    text-align: center;
+
+    padding: 20px;
+
+    border-bottom: 1px solid #333;
+
+}
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 28px;
+
+    letter-spacing: 2px;
+
+}
+
+/* --- Genre Row --- */
+
+.genres {
+
+    display: flex;
+
+    overflow-x: auto;
+
+    padding: 10px;
+
+}
+
+.genre {
+
+    background: #222;
+
+    padding: 10px 16px;
+
+    margin-right: 10px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+}
+
+/* --- Club Cards --- */
+
+.club {
+
+    border-bottom: 1px solid #333;
+
+    padding: 16px;
+
+}
+
+.club h2 {
+
+    margin: 0;
+
+    font-size: 20px;
+
+}
+
+.genreTag {
+
+    font-size: 14px;
+
+    color: #00ff88;
+
+}
+
+.dj {
+
+    font-size: 14px;
+
+    margin-top: 4px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Age Gate -->
+
+<div id="ageGate">
+
+    <h2>Are you 18 years old or above?</h2>
+
+    <button onclick="enterSite()">ENTER</button>
+
+</div>
+
+<!-- Header -->
+
+<div class="header">
+
+    <h1>MANA TONIGHT</h1>
+
+    <p>Kuala Lumpur — Tonight</p>
+
+</div>
+
+<!-- Genre Filter -->
+
+<div class="genres">
+
+<div class="genre" onclick="filterGenre('all')">
+
+All
+
+</div>
+
+<div class="genre" onclick="filterGenre('hiphop')">
+
+Hip-Hop
+
+</div>
+
+<div class="genre" onclick="filterGenre('techno')">
+
+Techno
+
+</div>
+
+<div class="genre" onclick="filterGenre('edm')">
+
+EDM
+
+</div>
+
+<div class="genre" onclick="filterGenre('house')">
+
+House
+
+</div>
+
+</div>
+
+<!-- Club List -->
+
+<div id="clubList">
+
+<div class="club" data-genre="techno">
+
+<h2>Kyo KL</h2>
+
+<div class="genreTag">
+
+Techno / House
+
+</div>
+
+<div class="dj">
+
+DJ Jay — 12AM
+
+</div>
+
+</div>
+
+<div class="club" data-genre="hiphop">
+
+<h2>Pitt Club</h2>
+
+<div class="genreTag">
+
+Hip-Hop
+
+</div>
+
+<div class="dj">
+
+DJ Nesh — 11PM
+
+</div>
+
+</div>
+
+<div class="club" data-genre="edm">
+
+<h2>Zouk KL</h2>
+
+<div class="genreTag">
+
+EDM
+
+</div>
+
+<div class="dj">
+
+DJ Lucas — 10PM
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* Age Gate */
+
+function enterSite() {
+
+    document.getElementById("ageGate").style.display = "none";
+
+}
+
+/* Genre Filter */
+
+function filterGenre(genre) {
+
+    let clubs = document.querySelectorAll(".club");
+
+    clubs.forEach(club => {
+
+        if (genre === "all") {
+
+            club.style.display = "block";
+
+        } 
+
+        else if (club.dataset.genre === genre) {
+
+            club.style.display = "block";
+
+        } 
+
+        else {
+
+            club.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1992,7 +1992,7 @@ function gLoad(){
 function gestOpen(){
   if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){add("e","This browser cannot open the camera.");return}
   unlockSpeech();ctx();standbyPause();
-  navigator.mediaDevices.getUserMedia({video:{facingMode:"user",width:{ideal:640},height:{ideal:480},frameRate:{ideal:30,max:30}},audio:false}).then(function(st){
+  camGet("user",640,480,30).then(function(st){
     gest.stream=st;var v=$("gVid");v.srcObject=st;v.play().catch(function(){});
     var ow=document.querySelector(".orbw"),gr=$("gRing");gr.appendChild(ow);
     gest.base=ow.offsetWidth||380;gr.style.width=gest.base+"px";gr.style.height=gest.base+"px";
@@ -2006,7 +2006,7 @@ function gestOpen(){
       $("gHint").textContent="Hand tracking could not load. Check your internet connection, then EXIT and try HANDS again.";$("gSt").textContent="OFFLINE"});
   }).catch(function(e){
     var n=String(e&&e.name||e);
-    add("e",/NotAllowed|Permission/i.test(n)?"The camera is blocked. In Chrome tap the lock icon in the address bar, allow Camera for this site, then try HANDS again.":"I cannot open the front camera ("+n.slice(0,40)+").");
+    add("e",/NotAllowed|Permission/i.test(n)?"The camera is blocked. In Chrome tap the lock icon in the address bar, allow Camera for this site, then try HANDS again.":/NotReadable/i.test(n)?"Another app or tab is using the camera. Close other apps and Chrome tabs that use it, then try HANDS again.":"I cannot open the front camera ("+n.slice(0,40)+").");
   });
 }
 function gestClose(){
@@ -2032,6 +2032,13 @@ $("gTalk").addEventListener("click",function(){if(busy)return;unlockSpeech();ctx
 window.__gestTest=function(res){gProcess(res)};
 
 /* ---------- live eyes: camera with ring HUD ---------- */
+function camGet(face,w,h,fps){
+  var tries=[{video:{facingMode:{ideal:face},width:{ideal:w},height:{ideal:h},frameRate:{ideal:fps,max:fps}},audio:false},{video:{facingMode:{ideal:face}},audio:false},{video:true,audio:false}],i=0;
+  function go(){return navigator.mediaDevices.getUserMedia(tries[i]).catch(function(e){
+    if(++i<tries.length&&/NotReadable|Overconstrained|Abort|Type|Constraint/i.test(String(e&&e.name)))return new Promise(function(r){setTimeout(r,400)}).then(go);
+    throw e})}
+  return go();
+}
 var eyes={on:false,stream:null,face:"environment",poll:0};
 function eyesFrame(mx){
   var v=$("eyeVid");if(!eyes.on||!v||!v.videoWidth)return null;
@@ -2040,7 +2047,7 @@ function eyesFrame(mx){
 function eyesStart(){
   var v=$("eyeVid");
   if(eyes.stream){try{eyes.stream.getTracks().forEach(function(t){t.stop()})}catch(e){}eyes.stream=null}
-  return navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:eyes.face},width:{ideal:640},height:{ideal:480},frameRate:{ideal:24,max:24}},audio:false}).then(function(st){
+  return camGet(eyes.face,640,480,24).then(function(st){
     eyes.stream=st;v.srcObject=st;v.className=eyes.face==="user"?"mir":"";
     return v.play().catch(function(){});
   });
@@ -2054,7 +2061,7 @@ function eyesOpen(){
     if(!cfg.key)$("eyeCap").textContent="Add a brain key in CONFIG so I can describe what I see.";
   }).catch(function(e){
     var n=String(e&&e.name||e);
-    add("e",/NotAllowed|Permission/i.test(n)?"The camera is blocked. Settings > Safari > Camera, allow it for this site. You can still send a photo.":"I cannot open the camera ("+n.slice(0,40)+"). You can still send a photo.");
+    add("e",/NotAllowed|Permission/i.test(n)?"The camera is blocked. Allow Camera for this site in the browser, then try again. You can still send a photo.":/NotReadable/i.test(n)?"Another app or tab is using the camera. Close other apps and Chrome tabs that use it, then try again. You can still send a photo.":"I cannot open the camera ("+n.slice(0,40)+"). You can still send a photo.");
     $("imgPick").click();
   });
 }

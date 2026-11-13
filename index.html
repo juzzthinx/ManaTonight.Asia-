@@ -249,8 +249,7 @@ body[data-st=speak] .ringx .r1{animation:pPulse .6s ease-in-out infinite}body[da
 #gest{position:fixed;inset:0;z-index:24;background:#000;display:none;overflow:hidden;color:var(--c)}
 #gest.on{display:block}
 body.gestOn>*:not(#gest):not(#eyes){visibility:hidden!important}
-#gVid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1) translateZ(0);opacity:.62;background:#000}
-.gshade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,8,.55),rgba(5,7,8,.15) 30%,rgba(5,7,8,.15) 70%,rgba(5,7,8,.6));pointer-events:none}
+#gVid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1) translateZ(0);opacity:.55;background:#000}
 #gRing{position:absolute;left:0;top:0;transform-origin:50% 50%;will-change:transform,opacity;transition:opacity .35s ease;pointer-events:auto}
 #gRing.gone{opacity:0;pointer-events:none}
 .gdot{position:absolute;left:0;top:0;width:26px;height:26px;margin:-13px 0 0 -13px;border:2px solid var(--c);border-radius:50%;opacity:0;transition:opacity .15s;pointer-events:none;will-change:transform;box-shadow:0 0 10px var(--c)}
@@ -479,7 +478,7 @@ body.gestOn>*:not(#gest):not(#eyes){visibility:hidden!important}
 <div class="cap" id="eyeCap"></div>
 <div class="chp"><button type="button" data-q="read">READ</button><button type="button" data-q="tr">TRANSLATE</button><button type="button" data-q="ex">EXPLAIN</button></div>
 <div class="tb"><button type="button" id="eyeTalk" class="hot">TALK</button><button type="button" id="eyeAsk">SCAN</button><button type="button" id="eyeFlip">FLIP</button><button type="button" id="eyePhoto">PHOTO</button><button type="button" id="eyeX">CLOSE</button></div></div>
-<div id="gest"><video id="gVid" playsinline muted autoplay></video><div class="gshade"></div><div class="gdot" id="gd0"></div><div class="gdot" id="gd1"></div><div id="gRing"></div>
+<div id="gest"><video id="gVid" playsinline muted autoplay></video><div class="gdot" id="gd0"></div><div class="gdot" id="gd1"></div><div id="gRing"></div>
 <div class="gtop"><span>HAND CONTROL</span><span id="gSt">STARTING</span></div><div class="ghint" id="gHint"></div><div class="gcap" id="gCap"></div>
 <div class="gtb"><button type="button" id="gTalk" class="hot">TALK</button><button type="button" id="gReset">RESET</button><button type="button" id="gExit">EXIT</button></div></div>
 <script>
@@ -827,11 +826,12 @@ var vc={ink:"#141414",red:"#d50000",dim:"#8b8680"};
 var vcv=$("viz"),vg=null,vsz=0,vRAF=0;
 function rgba(hex,a){var h=String(hex).trim().replace("#","");if(h.length===3)h=h.replace(/./g,"$&$&");var n=parseInt(h,16);if(isNaN(n))n=0;return"rgba("+((n>>16)&255)+","+((n>>8)&255)+","+(n&255)+","+a+")"}
 function vizColors(){var s=getComputedStyle(document.documentElement);vc.ink=s.getPropertyValue("--t").trim()||vc.ink;vc.red=s.getPropertyValue("--c").trim()||vc.red;vc.dim=s.getPropertyValue("--dim").trim()||vc.dim;var n=document.documentElement.getAttribute("data-theme")==="night";vc.glow=n?10:0;vc.add=n;vc.hi=n?"#e9fffb":vc.red}
-function vizSize(){var dpr=Math.min(window.devicePixelRatio||1,2),w=vcv.clientWidth||170;vsz=w;vcv.width=Math.round(w*dpr);vcv.height=Math.round(w*dpr);vg=vcv.getContext("2d");vg.__dpr=dpr;vg.setTransform(dpr,0,0,dpr,0,0)}
+function vizSize(){var dpr=gestLive?1:Math.min(window.devicePixelRatio||1,2),w=vcv.clientWidth||170;vsz=w;vcv.width=Math.round(w*dpr);vcv.height=Math.round(w*dpr);vg=vcv.getContext("2d");vg.__dpr=dpr;vg.setTransform(dpr,0,0,dpr,0,0)}
 var VN=96;
 function vizFrame(ts){
   vRAF=requestAnimationFrame(vizFrame);
   if(!vg||eyesLive)return;
+  if(gestLive&&ts-(viz.lastG||0)<30)return;viz.lastG=ts;
   var t=ts/1000,dt=Math.min(0.05,Math.max(0.001,t-(viz.t0||t)));viz.t0=t;
   var W=vsz,cx=W/2,cy=W/2,R=W*0.27,st=viz.state,g=vg,i,TAU=6.2832;
   var w=viz.w||(viz.w={l:0,t:0,s:0,b:0}),k=1-Math.exp(-dt*7);
@@ -1928,7 +1928,7 @@ function askPhoto(img,q){
 
 
 /* ---------- HANDS: gesture control of the ring (MediaPipe hand tracking) ---------- */
-var gest={on:false,stream:null,lm:null,raf:0,lastDet:0,x:0,y:0,s:1,tx:0,ty:0,ts:1,vis:true,fistT:0,openT:0,hideAt:0,lastHand:0,base:380,poll:0,cap:""};
+var gest={gap:60,lastT:-1,on:false,stream:null,lm:null,raf:0,lastDet:0,x:0,y:0,s:1,tx:0,ty:0,ts:1,vis:true,fistT:0,openT:0,hideAt:0,lastHand:0,base:380,poll:0,cap:""};
 var G_BUNDLES=["https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs","https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/+esm","https://unpkg.com/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs"];
 var G_WASM="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm";
 var G_MODEL="https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task";
@@ -1969,7 +1969,11 @@ function gProcess(res){
 function gFrame(ts){
   if(!gest.on)return;gest.raf=requestAnimationFrame(gFrame);
   var v=$("gVid");
-  if(gest.lm&&v.readyState>=2&&ts-gest.lastDet>45){gest.lastDet=ts;try{gProcess(gest.lm.detectForVideo(v,performance.now()))}catch(e){}}
+  if(gest.lm&&v.readyState>=2&&v.currentTime!==gest.lastT&&ts-gest.lastDet>gest.gap){
+    gest.lastDet=ts;gest.lastT=v.currentTime;var t0=performance.now();
+    try{gProcess(gest.lm.detectForVideo(v,t0))}catch(e){}
+    gest.gap=Math.max(50,Math.min(140,(performance.now()-t0)*1.8));
+  }
   gest.x+=(gest.tx-gest.x)*0.3;gest.y+=(gest.ty-gest.y)*0.3;gest.s+=(gest.ts-gest.s)*0.18;
   $("gRing").style.transform="translate3d("+(gest.x-gest.base/2)+"px,"+(gest.y-gest.base/2)+"px,0) scale("+gest.s+")";
 }
@@ -1992,11 +1996,11 @@ function gLoad(){
 function gestOpen(){
   if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){add("e","This browser cannot open the camera.");return}
   unlockSpeech();ctx();standbyPause();
-  camGet("user",640,480,30).then(function(st){
+  camGet("user",480,360,24).then(function(st){
     gest.stream=st;var v=$("gVid");v.srcObject=st;v.play().catch(function(){});
     var ow=document.querySelector(".orbw"),gr=$("gRing");gr.appendChild(ow);
     gest.base=ow.offsetWidth||380;gr.style.width=gest.base+"px";gr.style.height=gest.base+"px";
-    gest.on=true;gestLive=true;document.body.classList.add("gestOn");$("gest").classList.add("on");
+    gest.on=true;gestLive=true;try{vizSync()}catch(e){}document.body.classList.add("gestOn");$("gest").classList.add("on");
     gest.vis=true;gest.s=1;gest.ts=1;gest.fistT=0;gest.openT=0;gr.classList.remove("gone");
     gPlace(innerWidth/2,innerHeight/2,true);$("gCap").textContent="";
     $("gHint").textContent="Loading hand tracking...";$("gSt").textContent="LOADING";

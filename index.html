@@ -154,6 +154,37 @@ linear-gradient(#00d2be,#00d2be) bottom right/22px 1.5px no-repeat,linear-gradie
 #boot.done #reactor{transform:scale(1.9);opacity:0}
 #boot.done #bList,#boot.done .t,#boot.done .sub{opacity:0}
 @media (max-height:700px){#reactor{width:230px}#bList{min-height:118px}#boot{gap:12px}}
+
+/* ---------- v9.37 minimal interface (theme and settings untouched) ---------- */
+.sig{display:none}.hbtns{display:flex;gap:8px;align-items:center}
+body.mnm .wx,body.mnm .mkt,body.mnm .chips,body.mnm .modes{display:none!important}
+body.mnm .brand small{display:none}
+body.mnm .sig{display:block;text-align:center;font-family:"Michroma","Eurostile",sans-serif;font-size:8px;letter-spacing:.34em;color:var(--dim);padding:0 20px 4px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body.mnm .sig b{color:var(--c);font-weight:400;letter-spacing:.3em}
+body.mnm .bar input{border-radius:999px;background:rgba(255,255,255,.035);border:1px solid var(--cardb)}
+body.mnm #log{padding-top:8px}
+@media (min-width:860px){body.mnm .sig{grid-column:1;grid-row:1;align-self:end;text-align:left;padding:0 30px 6px}body.mnm header{padding-bottom:26px}}
+
+/* ---------- v9.38 minimal, second take: giant clock, breathing aura, transcript stream, floating glass bar ---------- */
+body.mnm .sig{display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px 20px 0;letter-spacing:0;font-size:inherit}
+body.mnm .sig i{font-style:normal;font-family:"Barlow","Avenir Next","Helvetica Neue",Arial,sans-serif;font-weight:200;font-size:60px;letter-spacing:.05em;line-height:1;color:#eef3f4;text-shadow:0 0 28px rgba(46,230,214,.18)}
+body.mnm .sig u{text-decoration:none;color:var(--c);animation:mnc 1.6s steps(2,jump-none) infinite}
+body.mnm .sig small{font-family:"Michroma","Eurostile",sans-serif;font-size:7px;letter-spacing:.3em;color:var(--dim);white-space:nowrap}
+@keyframes mnc{0%{opacity:1}50%{opacity:.15}}
+body.mnm header{padding-bottom:0}
+body.mnm .iconbtn{border:0;background:none;color:var(--dim);font-size:8px;letter-spacing:.26em;padding:6px 6px}
+body.mnm .hbtns{gap:6px}
+body.mnm .orbw::before{content:"";position:absolute;inset:-34%;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(46,230,214,.17),transparent 62%);background:radial-gradient(circle,color-mix(in srgb,var(--c) 20%,transparent),transparent 62%);animation:mnb 7s ease-in-out infinite}
+@keyframes mnb{0%,100%{transform:scale(.88);opacity:.7}50%{transform:scale(1.06);opacity:1}}
+body.mnm #log{padding:22px 26px 12px;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 26%);mask-image:linear-gradient(to bottom,transparent 0,#000 26%)}
+body.mnm .m.a{border-left:0;padding:2px 0;margin:0 auto 16px;text-align:center;font-size:18px;font-weight:300;line-height:1.5;max-width:100%}
+body.mnm .m.u{background:none;border-radius:0;padding:0;margin:0 auto 8px;text-align:center;font-size:10px;letter-spacing:.22em;color:var(--dim);text-transform:uppercase}
+body.mnm .m.u::before{content:"\203A  ";color:var(--c)}
+body.mnm .m.e{text-align:center;padding-left:0;border-left:0}
+body.mnm .bar{margin:0 14px calc(env(safe-area-inset-bottom) + 10px);width:auto;padding:6px;border:1px solid var(--cardb);border-radius:999px;background:rgba(8,14,16,.62);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 0 30px rgba(46,230,214,.06)}
+body.mnm .bar input{background:none;border:0}
+@media (max-height:700px){body.mnm .sig i{font-size:44px}}
+@media (min-width:860px){body.mnm .sig{align-items:flex-start;padding:0 30px 6px}body.mnm .sig i{font-size:64px}body.mnm header{padding-bottom:104px}body.mnm .m.a{font-size:20px}body.mnm .bar{margin:0 24px 18px 24px}}
 @media (max-height:800px){#orb,#viz{width:160px;height:160px}}
 @media (max-height:700px){#orb,#viz{width:136px;height:136px}}
 .hud.on{display:flex}
@@ -329,6 +360,7 @@ body.gestOn>*:not(#gest):not(#eyes){visibility:hidden!important}
 #holo.on{display:block}
 #hVid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1) translateZ(0);opacity:0;pointer-events:none;background:#000;filter:brightness(.8) contrast(1.1) saturate(.7)}
 #holo.ar{background:#000}#holo.ar #hVid{opacity:.62}
+#holo.skar #hVid{transform:translateZ(0);opacity:.94;filter:brightness(.92) contrast(1.06) saturate(.95)}
 #hCur{position:absolute;left:-23px;top:-23px;width:46px;height:46px;border-radius:50%;border:2px solid #e8fffc;pointer-events:none;opacity:0;z-index:5;transition:transform .09s linear,opacity .15s;background:conic-gradient(rgba(46,230,214,.75) calc(var(--p,0)*360deg),rgba(46,230,214,0) 0);box-shadow:0 0 12px var(--c)}
 #hCur.on{opacity:1}
 #hHands.on{background:var(--c);color:#021012}
@@ -471,6 +503,8 @@ body.lite .xsw{display:none}
 #xr.m2 #xVid{filter:grayscale(1) contrast(1.15) brightness(.3) sepia(1) hue-rotate(var(--xh)) saturate(1.5)}
 #xr.m2 #xE{opacity:1}
 .xbt button#xMode{padding:8px 9px}
+#xr.m4 #xVid{filter:contrast(1.06) brightness(.84) saturate(.92)}
+#xr.m4 #xE{opacity:0}
 #xr.m3 #xVid{opacity:0}
 #xr.m3 .xvg{background:radial-gradient(ellipse at 50% 46%,rgba(0,0,0,0) 50%,rgba(10,0,20,.6) 100%)}
 #xr.m3 #xE{opacity:1}
@@ -480,8 +514,9 @@ body.lite .xsw{display:none}
 <div class="sbar"></div>
 <header>
   <div class="brand">JARVIS<small>J.NAZREEN &middot; <span id="ver"></span></small></div>
-  <button class="iconbtn" id="openSet">CONFIG</button>
+  <span class="hbtns"><button class="iconbtn" id="mnBtn" type="button">FULL</button><button class="iconbtn" id="openSet">CONFIG</button></span>
 </header>
+<div class="sig" id="sig"></div>
 <div class="hud"><span id="hL"></span><span id="hR"></span></div>
 <div class="stage">
   <div class="orbw"><div class="ringx"><svg class="rl r1" viewBox="0 0 200 200"><circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" stroke-width="5" opacity=".85"/><circle cx="100" cy="100" r="86" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".8"/></svg><svg class="rl r2" viewBox="0 0 200 200"><circle cx="100" cy="100" r="99" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2 8" opacity=".7"/></svg><svg class="rl r3" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90.5" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="30 14 5 14" opacity=".55"/></svg><svg class="rl r4" viewBox="0 0 200 200"><path d="M100 4 A96 96 0 0 1 196 100" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".95"/><path d="M100 196 A96 96 0 0 1 4 100" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".6"/></svg></div><button type="button" id="orb" aria-label="Talk to Jarvis"><canvas id="viz"></canvas></button><div class="rchip rc1" id="rc1" data-q="what time is it"><span>TIME</span><b id="rv1">--</b></div><div class="rchip rc2" id="rc2" data-q="what is the weather"><span>WEATHER</span><b id="rv2">--</b></div><div class="rchip rc3" id="rc3" data-q="how is the klci"><span>KLCI</span><b id="rv3">--</b></div><div class="rchip rc4" id="rc4" data-q="how is my paper trading"><span>CHIO P/L</span><b id="rv4">--</b></div><div class="rmh" id="rmh"></div><button type="button" class="rmi" data-a="eyes">EYES</button><button type="button" class="rmi" data-a="hands">HANDS</button><button type="button" class="rmi" data-a="chio">CHIO</button><button type="button" class="rmi" data-a="tasks">TASKS</button><button type="button" class="rmi" data-a="waze">WAZE</button><button type="button" class="rmi" data-a="talk">TALK</button><button type="button" class="rmi" data-a="holo">HOLO</button>
@@ -765,7 +800,7 @@ body.lite .xsw{display:none}
 <div class="gtop"><span>HAND CONTROL</span><span id="gSt">STARTING</span></div><div class="ghint" id="gHint"></div><div class="gcap" id="gCap"></div>
 <div class="gtb"><button type="button" id="gTalk" class="hot">TALK</button><button type="button" id="gReset">RESET</button><button type="button" id="gExit">EXIT</button></div></div>
 <div id="xr"><video id="xVid" playsinline muted autoplay></video><canvas id="xE"></canvas><canvas id="xB"></canvas><div class="xvg"></div><div class="xsw"></div><div class="xtop"><div><b>X-RAY / SCAN</b><span id="xRead">STANDBY</span></div><div class="xbt"><button id="xMode" type="button">X-RAY</button><button id="xTint" type="button">TEAL</button><button id="xFlip" type="button">FLIP</button><button id="xTalk" type="button">TALK</button><button id="xExit" type="button">EXIT</button></div></div><div id="xCap"></div><div class="xhint" id="xHint"></div></div>
-<div id="holo"><video id="hVid" playsinline muted autoplay></video><canvas id="hc"></canvas><div id="hCur"></div><div class="hsw"></div><div id="hDesk"><div class="dkClock"><b id="dkT">--:--</b><small id="dkS"></small></div><div id="dkD"></div><div id="dkRow"></div></div><div class="htop"><div><b>HOLO / EARTH</b><span id="hRead"></span></div><div class="hbt"><button id="hKl" type="button">KLCC</button><button id="hOrb" type="button">ORBS</button><button id="hHands" type="button">HANDS</button><button id="hTalk" type="button">TALK</button><button id="hExit" type="button">EXIT</button></div></div><div id="hCap"><div id="hCapU"></div><div id="hCapA"></div></div><div id="skTs"><div class="skr"><button type="button" id="skPl">&#9654;</button><input type="range" id="skRg" min="-720" max="720" step="1" value="0"><button type="button" id="skNow">NOW</button></div><div class="skd"><button type="button" id="skDm">&#9664; DAY</button><span id="skDt"></span><button type="button" id="skDp">DAY &#9654;</button></div><div class="skc"><button type="button" data-w="lines">LINES</button><button type="button" data-w="grid">GRID</button><button type="button" data-w="mw">MILKY WAY</button><button type="button" data-w="ecl">ECLIPTIC</button><button type="button" data-w="gnd">GROUND</button><button type="button" data-w="gy">GYRO</button></div></div><div id="solTs"><button type="button" id="solPl">&#9654;</button><input type="range" id="solRg" min="-3650" max="3650" step="1" value="0"><button type="button" id="solNow">NOW</button><span id="solDt"></span></div><div id="hpan"></div><div class="hhint" id="hHint">DRAG TO SPIN · PINCH TO ZOOM · TAP A CITY</div></div>
+<div id="holo"><video id="hVid" playsinline muted autoplay></video><canvas id="hc"></canvas><div id="hCur"></div><div class="hsw"></div><div id="hDesk"><div class="dkClock"><b id="dkT">--:--</b><small id="dkS"></small></div><div id="dkD"></div><div id="dkRow"></div></div><div class="htop"><div><b>HOLO / EARTH</b><span id="hRead"></span></div><div class="hbt"><button id="hKl" type="button">KLCC</button><button id="hOrb" type="button">ORBS</button><button id="hHands" type="button">HANDS</button><button id="hTalk" type="button">TALK</button><button id="hExit" type="button">EXIT</button></div></div><div id="hCap"><div id="hCapU"></div><div id="hCapA"></div></div><div id="skTs"><div class="skr"><button type="button" id="skPl">&#9654;</button><input type="range" id="skRg" min="-720" max="720" step="1" value="0"><button type="button" id="skNow">NOW</button></div><div class="skd"><button type="button" id="skDm">&#9664; DAY</button><span id="skDt"></span><button type="button" id="skDp">DAY &#9654;</button></div><div class="skc"><button type="button" data-w="lines">LINES</button><button type="button" data-w="grid">GRID</button><button type="button" data-w="mw">MILKY WAY</button><button type="button" data-w="ecl">ECLIPTIC</button><button type="button" data-w="gnd">GROUND</button><button type="button" data-w="gy">GYRO</button><button type="button" data-w="ar">AR</button></div></div><div id="solTs"><button type="button" id="solPl">&#9654;</button><input type="range" id="solRg" min="-3650" max="3650" step="1" value="0"><button type="button" id="solNow">NOW</button><span id="solDt"></span></div><div id="hpan"></div><div class="hhint" id="hHint">DRAG TO SPIN · PINCH TO ZOOM · TAP A CITY</div></div>
 <script>
 (function(){
 "use strict";
@@ -875,7 +910,7 @@ function saveTasks(){sv("jv_tasks",JSON.stringify(tasks))}
 /* ---------- audio ---------- */
 var AC=window.AudioContext||window.webkitAudioContext, actx=null;
 function ctx(){try{if(!actx&&AC)actx=new AC();if(actx&&actx.state==="suspended")actx.resume()}catch(e){}return actx}
-function beep(){
+function beep(){sndPlay("timer");return;
   var c=ctx();if(!c)return;
   [0,0.35,0.7].forEach(function(t){
     try{var o=c.createOscillator(),g=c.createGain();o.type="sine";o.frequency.value=880;g.gain.value=0.0001;
@@ -1378,7 +1413,7 @@ document.addEventListener("visibilitychange",wxSync);
 $("wx").addEventListener("click",function(){$("wxS").textContent="LOADING...";getWeather(true).then(function(w){if(!w){wx=wx||null;paintWx();$("wxS").textContent="WEATHER UNAVAILABLE · TAP TO RETRY"}})});
 function pick(a){return a[Math.floor(Math.random()*a.length)]}
 function R(t,links){return{t:t,links:links||null}}
-var VER="v9.36 PAD";var lastEndSir=false;var eyesLive=false,gestLive=false,holoLive=false,xrLive=false;
+var VER="v9.39 PAD";var lastEndSir=false;var eyesLive=false,gestLive=false,holoLive=false,xrLive=false;
 function cleanId(x){return String(x||"").replace(/[\u2010-\u2015\u2212]/g,"-").replace(/\s+/g,"")}
 var NUM={zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12,thirteen:13,fourteen:14,fifteen:15,sixteen:16,seventeen:17,eighteen:18,nineteen:19,twenty:20,thirty:30,forty:40,fifty:50,sixty:60,seventy:70,eighty:80,ninety:90};
 function norm(t){
@@ -1688,9 +1723,35 @@ function proReady(){
   var b=$("boot");if(b&&b.style.display!=="none"&&!b.classList.contains("out"))return false;
   return true;
 }
-function chime(){
-  var c=ctx();if(!c)return;
-  [[0,660],[0.16,990]].forEach(function(p){try{var o=c.createOscillator(),g=c.createGain();o.type="sine";o.frequency.value=p[1];g.gain.value=0.0001;o.connect(g);g.connect(c.destination);var s=c.currentTime+p[0];g.gain.exponentialRampToValueAtTime(0.18,s+0.02);g.gain.exponentialRampToValueAtTime(0.0001,s+0.4);o.start(s);o.stop(s+0.45)}catch(e){}});
+/* ===== v9.37: signature sound identity (E open-fifth motif, teal bell + soft echo) ===== */
+var SND={on:ld("jv_snd","1")!=="0",bus:null};
+function sndBus(c){
+  if(SND.bus&&SND.bus.c===c)return SND.bus;
+  var m=c.createGain(),lp=c.createBiquadFilter(),d=c.createDelay(.6),fb=c.createGain(),wl=c.createBiquadFilter(),wg=c.createGain();
+  m.gain.value=.9;lp.type="lowpass";lp.frequency.value=5200;d.delayTime.value=.23;fb.gain.value=.3;wl.type="lowpass";wl.frequency.value=2200;wg.gain.value=.26;
+  m.connect(lp);lp.connect(c.destination);lp.connect(d);d.connect(wl);wl.connect(fb);fb.connect(d);wl.connect(wg);wg.connect(c.destination);
+  return SND.bus={c:c,i:m}
+}
+function sndN(f,t,dur,g,type,sw,atk){
+  try{var c=ctx();if(!c||!SND.on)return;var b=sndBus(c),o=c.createOscillator(),e=c.createGain(),s0=c.currentTime+t;
+    o.type=type||"sine";o.frequency.setValueAtTime(f,s0);if(sw)o.frequency.exponentialRampToValueAtTime(sw,s0+dur);
+    e.gain.setValueAtTime(.0001,s0);e.gain.exponentialRampToValueAtTime(g,s0+(atk||.015));e.gain.exponentialRampToValueAtTime(.0001,s0+dur);
+    o.connect(e);e.connect(b.i);o.start(s0);o.stop(s0+dur+.05)}catch(e){}
+}
+function sndB(f,t,dur,g){sndN(f,t,dur,g);sndN(f*2.76,t,dur*.45,g*.22)}
+function sndPlay(k){
+  if(!SND.on)return;var E5=659.25,G5=830.61,B5=987.77,E6=1318.51;
+  if(k==="boot"){sndN(82.41,0,2.6,.11,"triangle",0,.7);sndN(164.81,.2,2.2,.05,"sine",0,.6);[329.63,493.88,659.25,987.77,1318.51].forEach(function(f,i){sndB(f,.45+i*.16,1.5,.1)});sndN(2093,1.3,1.3,.025,"sine",2637,.3)}
+  else if(k==="sophon"){sndB(B5,0,1.7,.13);sndB(E5,.24,1.9,.12);sndN(1500,.55,.7,.035,"sine",2800,.2)}
+  else if(k==="due"){sndB(E5,0,1,.13);sndB(G5,.13,1,.12);sndB(B5,.26,1.3,.12)}
+  else if(k==="timer"){[0,.2,.4].forEach(function(t){sndB(B5,t,.7,.13)});sndB(E6,.6,1,.1)}
+  else if(k==="sky"){sndN(240,0,.8,.05,"sine",1100,.25);sndB(E6,.5,1.2,.06)}
+  else if(k==="ar"){sndN(200,0,.7,.05,"sine",1500,.2);sndB(E5,.35,.9,.08);sndB(B5,.5,1.1,.08);sndB(E6,.65,1.3,.07)}
+  else if(k==="mode"){sndN(1760,0,.09,.06,"triangle");sndN(2349,.05,.14,.04,"sine")}
+  else{sndB(E5,0,1,.14);sndB(B5,.17,1.3,.13)}
+}
+function chime(id){
+  id=String(id||"");sndPlay(/^iss/.test(id)?"sophon":/^(?:due|pre|late)/.test(id)||/^[a-z0-9]{3,}[dp]\d/.test(id)?"due":"alert")
 }
 function proNotify(m){
   try{if(document.hidden&&window.Notification&&Notification.permission==="granted")new Notification("JARVIS",{body:m.text,tag:m.id,silent:false})}catch(e){}
@@ -1702,7 +1763,7 @@ function proFlush(){
   var m=proQ.shift();
   if(m.k==="due"&&m.it)lastFired={it:m.it,ts:Date.now()};
   try{if(typeof unlockSpeech==="function")unlockSpeech()}catch(e){}
-  add("a",m.text);try{hist.push({role:"assistant",content:m.text});saveHist()}catch(e){}chime();
+  add("a",m.text);try{hist.push({role:"assistant",content:m.text});saveHist()}catch(e){}chime(m.k==="due"?"due":m.id);
   if(!(m.auto&&proQuiet()))speak(m.text);
   try{if(typeof ringPulse==="function")ringPulse()}catch(e){}
 }
@@ -2662,7 +2723,7 @@ function memAutoSync(){
   clearTimeout(SY.t);SY.t=setTimeout(function(){syncMem().catch(function(){})},4000);
 }
 function syCollect(){
-  var o={};try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.indexOf("jv_")===0&&!/^(jv_hist|jv_wx|jv_wxloc|jv_loc|jv_sycode|jv_syurl|jv_syts|jv_syauto|jv_mem|jv_memdel|jv_sky|jv_orbs|jv_tune|jv_lite|jv_ringpos|jv_agenda|jv_prost)$/.test(k))o[k]=localStorage.getItem(k)}}catch(e){}
+  var o={};try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.indexOf("jv_")===0&&!/^(jv_hist|jv_wx|jv_wxloc|jv_loc|jv_sycode|jv_syurl|jv_syts|jv_syauto|jv_mem|jv_memdel|jv_mnm|jv_snd|jv_sky|jv_orbs|jv_tune|jv_lite|jv_ringpos|jv_agenda|jv_prost)$/.test(k))o[k]=localStorage.getItem(k)}}catch(e){}
   return o;
 }
 function syPaint(){
@@ -2707,7 +2768,7 @@ if($("syMake")){
     SY.pullArm=0;syMsg("Getting settings...");
     syGet("s").then(function(r){
       if(!r||!r.data){syMsg("Nothing in the cloud yet. On your other device tap SEND SETTINGS TO CLOUD first.");return}
-      var n=0;Object.keys(r.data).forEach(function(k){if(k.indexOf("jv_")===0&&typeof r.data[k]==="string"&&!/^(jv_sycode|jv_syurl|jv_hist|jv_mem|jv_memdel|jv_sky|jv_orbs|jv_tune|jv_lite|jv_ringpos|jv_agenda|jv_prost)$/.test(k)){sv(k,r.data[k]);n++}});
+      var n=0;Object.keys(r.data).forEach(function(k){if(k.indexOf("jv_")===0&&typeof r.data[k]==="string"&&!/^(jv_sycode|jv_syurl|jv_hist|jv_mem|jv_memdel|jv_mnm|jv_snd|jv_sky|jv_orbs|jv_tune|jv_lite|jv_ringpos|jv_agenda|jv_prost)$/.test(k)){sv(k,r.data[k]);n++}});
       syMsg("Got "+n+" settings. Reloading...");setTimeout(function(){location.reload()},700);
     },function(e){syMsg(syErr(e))});
   });
@@ -3739,19 +3800,21 @@ function dkPaint(){
 /* ---------- X-RAY mode (v9.23): camera filter + edge scan + bone hands ---------- */
 var XR={mode:0,on:false,busy:false,face:"environment",mir:false,stream:null,raf:0,last:0,lastDet:0,lastE:0,lastT:-1,gap:70,fgap:33,egap:70,q:0,ema:10,n:0,tint:0,hs:[],ct:0,capT:0,sw:0,sh:0,dpr:1,ew:0,eh:0,vw:0,vh:0};window.__XR=XR;
 var XTINT=[{h:137,c:"46,230,214",n:"TEAL"},{h:172,c:"120,175,255",n:"ICE"},{h:92,c:"130,255,150",n:"GREEN"},{h:0,c:"255,176,64",n:"AMBER"}];
-var XMODES=[{n:"X-RAY",t:"X-RAY / SCAN",h:"SEE-THROUGH FILTER"},{n:"NIGHT",t:"NIGHT VISION",h:"BOOSTS LOW LIGHT"},{n:"EDGE",t:"EDGE SCAN",h:"WIREFRAME VIEW"},{n:"THERMAL",t:"THERMAL VIEW",h:"STYLISED HEAT LOOK"}];
-function xrModeSay(){return LT("Thermal view on. It is a stylised heat look made from brightness and movement, not a real temperature reading, Sir.","Paparan terma dihidupkan. Ia gaya haba daripada kecerahan dan gerakan, bukan bacaan suhu sebenar, Tuan.")}
+var XMODES=[{n:"X-RAY",t:"X-RAY / SCAN",h:"SEE-THROUGH FILTER"},{n:"NIGHT",t:"NIGHT VISION",h:"BOOSTS LOW LIGHT"},{n:"EDGE",t:"EDGE SCAN",h:"WIREFRAME VIEW"},{n:"THERMAL",t:"THERMAL VIEW",h:"STYLISED HEAT LOOK"},{n:"OBJECTS",t:"OBJECT SCAN",h:"LIVE RECOGNITION"}];
+function xrModeSay(){if(XR.mode===4)return LT("Object recognition on. I will box what I can recognise, around eighty everyday things. Tap a box and I will tell you more about it, Sir.","Pengecaman objek dihidupkan. Saya akan kotakkan apa yang dikenali. Ketik kotak untuk maklumat lanjut, Tuan.");return LT("Thermal view on. It is a stylised heat look made from brightness and movement, not a real temperature reading, Sir.","Paparan terma dihidupkan. Ia gaya haba daripada kecerahan dan gerakan, bukan bacaan suhu sebenar, Tuan.")}
 function xrMode(i,speak){
-  XR.mode=((i%4)+4)%4;var h=$("xr"),m=XMODES[XR.mode],q9;for(q9=1;q9<4;q9++)h.classList.toggle("m"+q9,XR.mode===q9);
+  XR.mode=((i%5)+5)%5;var h=$("xr"),m=XMODES[XR.mode],q9;for(q9=1;q9<5;q9++)h.classList.toggle("m"+q9,XR.mode===q9);
   var b=document.querySelector("#xr .xtop b");if(b)b.textContent=m.t;var mb=$("xMode");if(mb)mb.textContent=m.n;
   if(XR.mode===1){h.style.setProperty("--xh","62deg");h.style.setProperty("--xc","120,255,140");XR.tc=[120,255,140]}
   else if(XR.mode===3){h.style.setProperty("--xh","20deg");h.style.setProperty("--xc","255,190,90");XR.tc=[255,190,90]}
   else{xrTint(XR.tint);XR.tc=XTINT[XR.tint].c.split(",").map(Number)}
   var tb=$("xTint");if(tb)tb.style.display=(XR.mode===1||XR.mode===3)?"none":"";
   XR.pv=0;XR.cells=[];XR.blips=[];XR.hot=null;if(XR.tr)XR.tr.fill(0);
-  XR.egap=XR.mode>=3?((LITE||XR.q)?110:70):(LITE||XR.q>=2?1e9:XR.q===1?140:70);var xe=$("xE");if(xe)xe.style.display=(XR.mode>=3||(!LITE&&XR.q<2))?"":"none";
+  XR.egap=XR.mode===4?1e9:XR.mode>=3?((LITE||XR.q)?110:70):(LITE||XR.q>=2?1e9:XR.q===1?140:70);var xe=$("xE");if(xe)xe.style.display=XR.mode===4?"none":(XR.mode>=3||(!LITE&&XR.q<2))?"":"none";
   var g=XR.eg;if(g&&XR.ew)g.clearRect(0,0,XR.ew,XR.eh);XR.lastE=0;
+  OBJ.tr=[];if(XR.mode===4&&XR.on)objStart();
   xrCap("a",m.t+" · "+m.h);
+  if(speak)sndPlay("mode");
   if(speak)reply(XR.mode===1?LT("Night vision on. It boosts whatever light the camera has, so it cannot see in total darkness, Sir.","Penglihatan malam dihidupkan. Ia menguatkan cahaya sedia ada, jadi tidak boleh nampak dalam gelap total, Tuan."):XR.mode===2?LT("Edge scan on. Everything is now a wireframe.","Imbasan tepi dihidupkan. Semuanya kini rangka dawai, Tuan."):XR.mode>=3?xrModeSay():LT("X-ray filter on.","Penapis sinar-X dihidupkan, Tuan."))
 }
 var XCH=[[5,6,7,8],[9,10,11,12],[13,14,15,16],[17,18,19,20]];
@@ -3911,9 +3974,9 @@ function xrFrame(ts){
   if(!XR.on)return;XR.raf=requestAnimationFrame(xrFrame);
   if(ts-XR.last<XR.fgap)return;var dt=Math.min(.08,Math.max(.001,(ts-XR.last)/1000));XR.last=ts;var w0=performance.now();
   var v=$("xVid");
-  if(XR.lm&&v.readyState>=2&&v.currentTime!==XR.lastT&&ts-XR.lastDet>XR.gap){XR.lastDet=ts;XR.lastT=v.currentTime;xrDetect(v,ts)}
-  if((XR.q<2||XR.mode>=3)&&v.readyState>=2&&ts-XR.lastE>XR.egap){XR.lastE=ts;xrEdges(v)}
-  xrHands(ts,dt);if(XR.mode>=3)xrOver(ts,dt);
+  if(XR.lm&&XR.mode!==4&&v.readyState>=2&&v.currentTime!==XR.lastT&&ts-XR.lastDet>XR.gap){XR.lastDet=ts;XR.lastT=v.currentTime;xrDetect(v,ts)}
+  if(XR.mode!==4&&(XR.q<2||XR.mode>=3)&&v.readyState>=2&&ts-XR.lastE>XR.egap){XR.lastE=ts;xrEdges(v)}
+  xrHands(ts,dt);if(XR.mode===4)xrObjs(ts,dt);else if(XR.mode>=3)xrOver(ts,dt);
   var tk=$("xTalk");if(tk){var on=!!(conv&&conv.on);if(tk.classList.contains("on")!==on)tk.classList.toggle("on",on)}
   XR.ema=XR.ema*.92+(performance.now()-w0)*.08;
   if(++XR.n>45){XR.n=0;
@@ -3950,7 +4013,7 @@ function xrOff(speak){
   document.body.classList.remove("xrOn");$("xr").classList.remove("on");
   if(XR.stream){try{XR.stream.getTracks().forEach(function(t){t.stop()})}catch(e){}XR.stream=null}
   try{$("xVid").srcObject=null}catch(e){}
-  XR.hs=[];if(XR.g)XR.g.clearRect(0,0,XR.sw,XR.sh);
+  XR.hs=[];OBJ.tr=[];if(XR.g)XR.g.clearRect(0,0,XR.sw,XR.sh);
   if(speak)reply(LT("X-ray scanner off.","Pengimbas sinar-X dimatikan, Tuan.","X光扫描仪已关闭，先生。",null,"Рентгеновский сканер выключен, сэр.","X線スキャナーをオフにしました、サー。"));
 }
 function xrFlip(){
@@ -5188,7 +5251,7 @@ function skyDraw(ts,t,dt,ka){
     if(sl2)SKY.anc={x:o.sx,y:o.sy,c:"#ffd27a"}}
   g.globalAlpha=1;
   /* ground + compass */
-  skyGround(g,W,H,t);skyCompass(g,fs);
+  if(!SKY.ar)skyGround(g,W,H,t);skyCompass(g,fs);
   /* selection */
   var S=SKY.sel;
   if(S&&S.t!=="con"&&S.t!=="mw"){var so2=S.t==="iss"?S.o:S;if(so2.vis!==false&&so2.sx!=null&&skyPr(so2)){solBr(g,so2.sx,so2.sy,Math.max(18,(S.t==="body"&&(S.k==="moon"||S.k==="sun")?22:16)),"#ffffff",t);SKY.anc={x:so2.sx,y:so2.sy,c:"#9ffcf0"};var ph=(t*.8)%1;g.globalAlpha=(1-ph)*.6;g.strokeStyle="#9ffcf0";g.lineWidth=1.2;g.beginPath();g.arc(so2.sx,so2.sy,14+ph*18,0,TW2);g.stroke();g.globalAlpha=1;
@@ -5317,7 +5380,7 @@ function skyOpen(opts){
   var tgt2=null,sc=skyScan();
   if(SKY.B.moon.U>.2&&SKY.sunAlt<-4)tgt2=SKY.B.moon;else if(sc.pl.length&&SKY.sunAlt<-4)tgt2=sc.pl[0];
   HG.lon=tgt2?skyAzAlt(tgt2).az:(SKY.sunAlt>-4?skyAzAlt(SKY.B.sun).az+3.14:3.14159);HG.lat=.62;HG.zoom=.95;
-  skyLive();hcPan(skyList());skyCap();skyTsSync();skyTsOn(true);
+  skyLive();hcPan(skyList());skyCap();skyTsSync();skyTsOn(true);sndPlay("sky");
   if(!SKY.iss&&typeof lvIssPoll==="function"){try{lvIssPoll(true).then(function(){SKY.iss=1}).catch(function(){})}catch(e){}}
   if(opts.speak!==false)reply(skyOpenSay(opts.tonight))
 }
@@ -5399,7 +5462,7 @@ function skyTsSync(){
   var mins=Math.round(SKY.off/60000);if(!rg.matches(":active"))rg.value=Math.max(-720,Math.min(720,mins));
   if(dt)dt.textContent=skyDay(skyNowMs()).toUpperCase()+" "+skyTime()+(SKY.rate?" · ×"+SKY.rate+"":Math.abs(mins)<1?" · LIVE":"");
   if(pl)pl.textContent=SKY.rate?"❚❚":"▶";
-  var ch=document.querySelectorAll("#skTs .skc button[data-w]");Array.prototype.forEach.call(ch,function(b){var w=b.getAttribute("data-w");if(w==="gnd"){b.classList.toggle("on",SKY.gnd>0);b.textContent=SKY.gnd===2?"GROUND ½":"GROUND"}else if(w==="gy")b.classList.toggle("on",!!SKY.gy);else b.classList.toggle("on",!!SKY[w])})
+  var ch=document.querySelectorAll("#skTs .skc button[data-w]");Array.prototype.forEach.call(ch,function(b){var w=b.getAttribute("data-w");if(w==="gnd"){b.classList.toggle("on",SKY.gnd>0);b.textContent=SKY.gnd===2?"GROUND ½":"GROUND"}else if(w==="gy")b.classList.toggle("on",!!SKY.gy);else if(w==="ar")b.classList.toggle("on",!!SKY.ar);else b.classList.toggle("on",!!SKY[w])})
 }
 function skyTsBind(){
   var rg=$("skRg"),nw=$("skNow"),pl=$("skPl");if(!rg)return;
@@ -5411,6 +5474,7 @@ function skyTsBind(){
     var w=b.getAttribute("data-w");
     if(w==="gnd"){SKY.gnd=(SKY.gnd+1)%3;skySave();skyTsSync()}
     else if(w==="gy"){skyGyro()}
+    else if(w==="ar"){skyAr()}
     else{SKY[w]=SKY[w]?0:1;skySave();skyTsSync()}
     HG.touch=performance.now()})})
 }
@@ -5426,6 +5490,16 @@ function skyIntent(n){
   var s=n.replace(/^(?:hey |yo |ok |okay )?jarvis,? /,"").replace(/^please /,"").replace(/ please$/,"").replace(/,? sir$/,""),m,on=HG.on&&HG.mode==="sky";
   if(/^(?:show|open|display|bring up|pull up|launch|start|activate|take me to|go to|load|let s see|lets see)(?: me)?(?: the| my| our)? (?:night sky|sky|stars|star map|star chart|planetarium|sky view|sky map|constellations|stargazing|star gazing|heavens|night sky view|sky tonight|stars tonight)(?: view| mode| tonight| above me| over kl| over kuala lumpur)?$/.test(s)||/^(?:night sky|star map|star chart|stargazing|planetarium|sky view|look at the stars|look at the sky|what is in the sky tonight|whats in the sky tonight|what s in the sky tonight|what is in the sky|whats in the sky|what can i see tonight|what can i see in the sky|what is up tonight|whats up tonight|what s up tonight|the night sky|sky tonight)$/.test(s)){return{k:"sky",tonight:/tonight|what/.test(s)}}
   if(/^(?:which|what) planets (?:are|can i see)(?: visible| up| out)?(?: tonight| now| right now)?$/.test(s)||/^(?:what|which) (?:planets|stars) (?:can i see|are visible|are up)(?: tonight| now)?$/.test(s))return{k:"skytonight"};
+  if(/^(?:ar sky|sky ar|ar mode|sky ar mode|camera sky|sky camera|augmented reality sky|augmented sky|(?:see|show me|show) the sky (?:through|in|with) (?:my |the )?camera|sky through (?:my |the )?camera|overlay the sky|point the sky at my camera)$/.test(s))return{k:"skyar",on:true};
+  if(on&&SKY.ar&&/^(?:ar off|turn off ar|stop ar|exit ar|ar sky off|camera off|close the camera|turn off the camera)$/.test(s))return{k:"skyar",on:false};
+  if(/^(?:minimal|minimal view|minimal mode|minimal interface|minimalist|clean view|clean mode|clean interface|simple view|simple interface|minimise|minimize the interface|hide the clutter)$/.test(s))return{k:"mnm",on:true};
+  if(/^(?:full|full view|full mode|full interface|classic view|classic interface|show everything|show all|bring everything back|normal view|normal interface)$/.test(s))return{k:"mnm",on:false};
+  if(/^(?:mute (?:the )?(?:sounds?|chimes?|tones?)|sounds? off|silence (?:the )?(?:chimes?|sounds?)|turn off (?:the )?(?:sounds?|chimes?))$/.test(s))return{k:"snd",on:false};
+  if(/^(?:unmute (?:the )?(?:sounds?|chimes?)|sounds? on|turn on (?:the )?(?:sounds?|chimes?)|chimes on)$/.test(s))return{k:"snd",on:true};
+  if(/^(?:play|test|let me hear|do) (?:the |my |your )?(?:startup|start up|boot|signature|intro) (?:sound|chime|tone|theme)$/.test(s))return{k:"sndtest"};
+  if(/^(?:(?:turn on |start |open |enable |switch to |activate |go to )?(?:the )?(?:object|objects) (?:detection|recognition|recognizer|recogniser|scanner|scan|mode|vision|view|filter)|detect (?:the )?objects|recogni[sz]e (?:the )?objects|identify (?:the )?objects|start detecting|kenal pasti objek|pengesan objek)$/.test(s))return{k:"xrmode",m:4};
+  if(/^(?:what do you see|what can you see|what objects (?:do you see|are (?:there|here|in front of me))|list (?:the )?objects|count (?:the )?objects|what(?:'s| is) around me|what(?:'s| is) in front of me)$/.test(s))return XR.on&&XR.mode===4?{k:"objlist"}:{k:"ident"};
+  if(/^(?:what(?:'s| is) (?:this|that|it)|whats (?:this|that|it)|what am i (?:looking at|seeing|holding)|identify (?:this|that|it|the object)|recogni[sz]e (?:this|that)|tell me what (?:this|that) is|what kind of (?:thing|object) is (?:this|that)|apa (?:ni|ini|itu|benda ni))$/.test(s))return{k:"ident"};
   if(/\b(?:iss|space station)\b/.test(s)&&/^(?:when|what time|can i see|will i see|could i see|is the|next|show me when|tell me when|any)\b/.test(s)&&/\b(?:next pass|pass|fly over|go over|overhead|visible|see|when|tonight)\b/.test(s)&&!/^where/.test(s))return{k:"issnext"};
   if(!on)m=s.match(/^(?:where is|where s|where are|find|locate|show me|point (?:me )?(?:to|at)|point out) (?:the )?(.+?)(?: in the sky| tonight| in the night sky| right now| up there| overhead)?$/);
   else m=s.match(/^(?:where is|where s|where are|find|locate|show me|show|point (?:me )?(?:to|at)|point out|look at|go to|take me to|focus on|zoom (?:in )?(?:on|to)|center on|centre on|select|tap|identify|what is|what s) (?:the |that )?(.+?)(?: in the sky| tonight| right now)?$/);
@@ -5453,7 +5527,7 @@ function skyIntent(n){
     var hh=s.match(/^(?:go )?(forward|ahead|back|backward|backwards|rewind)(?: by)? (\d+|an|one|two|three|four|five|six|twelve) (hours?|days?)$/);
     if(hh){var nn={an:1,one:1,two:2,three:3,four:4,five:5,six:6,twelve:12}[hh[2]]||+hh[2],sg=/^(?:back|rewind)/.test(hh[1])?-1:1;return{k:"skytime",r:/^hour/.test(hh[3])?{hours:sg*nn}:{days:sg*nn}}}
     if(/^(?:in (?:an|one) hour|plus one hour|next hour)$/.test(s))return{k:"skytime",r:{hours:1}};
-    if(/^(?:gyro|use gyro|gyro on|turn on gyro|use sensors|motion sensor|point at the sky|point my phone at the sky|ar sky|sky ar|enable gyro|use the gyro)$/.test(s))return{k:"skygyro",on:true};
+    if(/^(?:gyro|use gyro|gyro on|turn on gyro|use sensors|motion sensor|point at the sky|point my phone at the sky|enable gyro|use the gyro)$/.test(s))return{k:"skygyro",on:true};
     if(/^(?:gyro off|turn off gyro|stop gyro|disable gyro|sensors off|stop using sensors)$/.test(s))return{k:"skygyro",on:false};
     if(/^(?:ground|horizon|toggle ground|hide the ground|show the ground|hide ground|show ground)$/.test(s))return{k:"skyground"};
     if(/^(?:what s up|whats up|what is up|what is visible|what can i see|what s visible)(?: tonight| now| right now)?$/.test(s))return{k:"skytonight"}}
@@ -5518,6 +5592,138 @@ function issNextSay(){
     reply(LLs(en))
   }).catch(function(){reply(LLs("I cannot reach the ISS tracker right now, Sir.","Penjejak ISS tidak dapat dicapai sekarang, Tuan."))})
 }
+/* ===== v9.37: AR sky (rear camera behind the live star map) ===== */
+function skyArFov(){
+  var W=HG.W||innerWidth,H=HG.H||innerHeight,L=62*SD,sc=W<H?Math.max(W/.75,H):Math.max(W,H/.75),fpx=sc/2/Math.tan(L/2),half=Math.min(W,H)/2,fov=4*Math.atan(half/(2*fpx));
+  return Math.max(.6,Math.min(6.5,75*SD/fov))
+}
+function skyAr(on){
+  if(on===undefined)on=!SKY.ar;
+  if(!(HG.on&&HG.mode==="sky")){hcOpen(true);skyOpen({speak:false})}
+  if(!on){if(HG.ar)hcAr(false);skyTsSync();return Promise.resolve(false)}
+  if(HG.ar&&SKY.ar)return Promise.resolve(true);
+  if(HG.arBusy)return Promise.resolve(false);
+  if(HG.ar)hcAr(false);
+  if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){hcCap("a","THIS BROWSER CANNOT OPEN THE CAMERA");return Promise.resolve(false)}
+  var h=$("holo"),v=$("hVid");
+  if(!SKY.gy)skyGyro(true);
+  HG.arBusy=true;hcCap("a","OPENING THE REAR CAMERA…");
+  return camGet("environment",1280,720,30).then(function(st){
+    HG.arBusy=false;if(!(HG.on&&HG.mode==="sky")){st.getTracks().forEach(function(t){t.stop()});return false}
+    HG.stream=st;v.srcObject=st;v.play().catch(function(){});SKY.ar=1;HG.ar=true;h.classList.add("ar","skar");HG.lastT=-1;
+    HG.zoom=skyArFov();SKY.go=null;hcSize();skyTsSync();sndPlay("ar");
+    $("hHint").textContent="AR · POINT UP · PINCH TO LINE THE STARS UP";hcCap("a","AR SKY · POINT YOUR PHONE AT THE SKY");
+    return true
+  }).catch(function(e){HG.arBusy=false;var n=String(e&&e.name||e);hcCap("a",/NotAllowed|Permission/i.test(n)?"THE CAMERA IS BLOCKED · ALLOW IT FOR THIS SITE":/NotReadable/i.test(n)?"ANOTHER APP IS USING THE CAMERA":"I CANNOT OPEN THE REAR CAMERA");return false})
+}
+function skyArSay(){reply(LLs("AR sky is on. Point your phone up and the stars and planets follow. The phone compass can be a few degrees off, so pinch to match the scale and line it up on the Moon or a bright planet, Sir.","Langit AR dihidupkan. Halakan telefon ke langit, bintang dan planet akan mengikut. Kompas telefon mungkin tersasar beberapa darjah, Tuan."))}
+/* ===== v9.37: minimal interface ===== */
+var MN={on:ld("jv_mnm","1")!=="0"};
+function mnApply(){try{document.body.classList.toggle("mnm",MN.on);var b=$("mnBtn");if(b)b.textContent=MN.on?"FULL":"MINIMAL";mnSig()}catch(e){}}
+function mnSig(){var e=$("sig");if(!e)return;var t=skyHM(Date.now()).split(":");e.innerHTML="<i>"+t[0]+"<u>:</u>"+t[1]+"</i><small>"+skyDay(Date.now()).toUpperCase()+" &middot; KUALA LUMPUR &middot; 3.14&deg;N 101.69&deg;E</small>"}
+function mnSet(on,say){MN.on=on;sv("jv_mnm",on?"1":"0");mnApply();sndPlay("mode");if(say)reply(on?LLs("Minimal view on, Sir. Say full view to bring everything back.","Paparan minimum dihidupkan, Tuan."):LLs("Full view restored, Sir.","Paparan penuh dipulihkan, Tuan."))}
+try{mnApply();var mb=$("mnBtn");if(mb)mb.addEventListener("click",function(){mnSet(!MN.on,false)});setInterval(mnSig,20000)}catch(e){}
+/* ===== v9.39: live object recognition (MediaPipe EfficientDet-Lite0, on-device) + "what is this" ===== */
+var OBJ_MODELS=["https://storage.googleapis.com/mediapipe-models/object_detector/efficientdet_lite0/float16/1/efficientdet_lite0.tflite","https://huggingface.co/litert-community/MediaPipe-ObjectDetector-EfficientDet-Lite0/resolve/main/efficientdet_lite0_float32.tflite"];
+var OBJ={det:null,p:null,err:0,last:0,lastT:-1,gap:110,ema:20,tr:[],id:0,sel:null,ask:0};
+function objLoad(){
+  if(OBJ.det)return Promise.resolve(OBJ.det);if(OBJ.p)return OBJ.p;var i=0;
+  function tryB(){if(i>=G_BUNDLES.length)return Promise.reject(new Error("bundle"));return import(G_BUNDLES[i++]).catch(tryB)}
+  OBJ.p=tryB().then(function(m){
+    var FR=m.FilesetResolver||(m.default&&m.default.FilesetResolver),OD=m.ObjectDetector||(m.default&&m.default.ObjectDetector);
+    return FR.forVisionTasks(G_WASM).then(function(fs){
+      var j=0;
+      function mk(url,del){return OD.createFromOptions(fs,{baseOptions:{modelAssetPath:url,delegate:del},runningMode:"VIDEO",scoreThreshold:.42,maxResults:10})}
+      function nextM(){if(j>=OBJ_MODELS.length)return Promise.reject(new Error("model"));var u=OBJ_MODELS[j++];return mk(u,"GPU").catch(function(){return mk(u,"CPU")}).catch(nextM)}
+      return nextM()})
+  }).then(function(d){OBJ.det=d;return d}).catch(function(e){OBJ.p=null;throw e});
+  return OBJ.p
+}
+function objStart(){OBJ.err=0;objLoad().catch(function(){OBJ.err=1})}
+function objTrack(dets,v,ts){
+  var W=XR.sw,H=XR.sh,vw=v.videoWidth||640,vh=v.videoHeight||480,sc=Math.max(W/vw,H/vh),ox=(W-vw*sc)/2,oy=(H-vh*sc)/2,T=OBJ.tr,i,j,used={};
+  for(i=0;i<dets.length&&i<10;i++){
+    var d=dets[i],b=d.boundingBox,c=d.categories&&d.categories[0];if(!b||!c)continue;
+    var w=b.width*sc,h=b.height*sc,x=b.originX*sc+ox,y=b.originY*sc+oy;if(XR.mir)x=W-x-w;
+    var best=-1,bd=1e9,cx=x+w/2,cy=y+h/2;
+    for(j=0;j<T.length;j++){var t=T[j];if(used[j]||t.l!==c.categoryName)continue;var dd=Math.hypot(t.tx+t.tw/2-cx,t.ty+t.th/2-cy);if(dd<bd&&dd<Math.max(w,h)*.7){bd=dd;best=j}}
+    if(best>=0){used[best]=1;var u=T[best];u.tx=x;u.ty=y;u.tw=w;u.th=h;u.s=c.score;u.seen=ts}
+    else{T.push({id:++OBJ.id,l:c.categoryName,x:x,y:y,w:w,h:h,tx:x,ty:y,tw:w,th:h,s:c.score,a:0,seen:ts})}
+  }
+}
+function objVisible(){var o=[],i;for(i=0;i<OBJ.tr.length;i++){if(OBJ.tr[i].a>.35&&!OBJ.tr[i].lost)o.push(OBJ.tr[i])}return o}
+function objPhrase(){
+  var v=objVisible(),c={},k,o=[];v.forEach(function(t){c[t.l]=(c[t.l]||0)+1});
+  for(k in c){var n=c[k],nm=String(k).replace(/_/g," ");o.push(n===1?(/^[aeiou]/i.test(nm)?"an ":"a ")+nm:n+" "+(nm==="person"?"people":/s$/.test(nm)?nm:nm+"s"))}
+  if(!o.length)return"";return o.length===1?o[0]:o.slice(0,-1).join(", ")+" and "+o[o.length-1]
+}
+function xrObjs(ts,dt){
+  var g=XR.g,W=XR.sw,H=XR.sh,v=$("xVid"),T=OBJ.tr,i,k=1-Math.exp(-dt*16),rc="rgb("+XR.tc.join(",")+")";
+  if(OBJ.det&&v.readyState>=2&&v.currentTime!==OBJ.lastT&&ts-OBJ.last>OBJ.gap){
+    OBJ.last=ts;OBJ.lastT=v.currentTime;var t0=performance.now(),res=null;
+    try{res=OBJ.det.detectForVideo(v,ts)}catch(e){res=null}
+    OBJ.ema=OBJ.ema*.8+(performance.now()-t0)*.2;OBJ.gap=Math.max(LITE?200:100,Math.min(420,OBJ.ema*3.2));
+    if(res)objTrack(res.detections||[],v,ts)
+  }
+  g.save();g.setTransform(XR.dpr,0,0,XR.dpr,0,0);g.font="600 9px ui-monospace,Menlo,monospace";g.textAlign="left";
+  for(i=T.length-1;i>=0;i--){
+    var t=T[i];t.lost=ts-t.seen>480;t.a+=((t.lost?0:1)-t.a)*Math.min(1,dt*9);
+    if(t.lost&&t.a<.03){T.splice(i,1);continue}
+    t.x+=(t.tx-t.x)*k;t.y+=(t.ty-t.y)*k;t.w+=(t.tw-t.w)*k;t.h+=(t.th-t.h)*k;
+    var x=t.x,y=t.y,w=t.w,h=t.h,bl=Math.max(8,Math.min(20,Math.min(w,h)*.26)),sel=OBJ.sel===t.id&&ts-OBJ.selT<1800;
+    g.globalAlpha=t.a*.2;g.strokeStyle=rc;g.lineWidth=1;g.strokeRect(x,y,w,h);
+    g.globalAlpha=t.a*(sel?1:.92);g.lineWidth=sel?2.4:1.6;g.beginPath();
+    g.moveTo(x,y+bl);g.lineTo(x,y);g.lineTo(x+bl,y);g.moveTo(x+w-bl,y);g.lineTo(x+w,y);g.lineTo(x+w,y+bl);
+    g.moveTo(x,y+h-bl);g.lineTo(x,y+h);g.lineTo(x+bl,y+h);g.moveTo(x+w-bl,y+h);g.lineTo(x+w,y+h);g.lineTo(x+w,y+h-bl);g.stroke();
+    var tx=String(t.l).replace(/_/g," ").toUpperCase()+"  "+Math.round(t.s*100)+"%",tw=g.measureText(tx).width+12,ty=y>24?y-19:y+4;
+    g.globalAlpha=t.a*.78;g.fillStyle="rgba(0,10,12,.78)";g.fillRect(x,ty,tw,16);g.fillStyle=rc;g.fillRect(x,ty,2,16);
+    g.globalAlpha=t.a;g.fillStyle="#e8ffff";g.fillText(tx,x+7,ty+11);
+  }
+  g.restore();
+  var vis=objVisible();
+  $("xRead").textContent=OBJ.det?(vis.length?vis.length+" OBJECT"+(vis.length>1?"S":"")+" LOCKED":"SCANNING"):OBJ.err?"DETECTOR OFFLINE":"LOADING DETECTOR";
+  var hn=$("xHint");if(hn){var tx2=OBJ.det?(vis.length?"TAP A BOX TO ASK ABOUT IT":"POINT AT SOMETHING"):OBJ.err?"COULD NOT LOAD THE DETECTOR · CHECK YOUR INTERNET":"LOADING OBJECT DETECTOR…";if(hn.textContent!==tx2)hn.textContent=tx2}
+}
+function objCrop(t){
+  var v=$("xVid"),W=XR.sw,H=XR.sh,vw=v.videoWidth,vh=v.videoHeight;if(!vw)return null;
+  var sc=Math.max(W/vw,H/vh),ox=(W-vw*sc)/2,oy=(H-vh*sc)/2,bx=XR.mir?W-(t.x+t.w):t.x,
+      sx=(bx-ox)/sc,sy=(t.y-oy)/sc,sw=t.w/sc,sh=t.h/sc,p=Math.max(sw,sh)*.12;
+  sx=Math.max(0,sx-p);sy=Math.max(0,sy-p);sw=Math.min(vw-sx,sw+2*p);sh=Math.min(vh-sy,sh+2*p);if(sw<8||sh<8)return null;
+  var m=Math.min(1,640/Math.max(sw,sh)),c=document.createElement("canvas");c.width=Math.round(sw*m);c.height=Math.round(sh*m);
+  var x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(v,sx,sy,sw,sh,0,0,c.width,c.height);
+  var d=c.toDataURL("image/jpeg",.84);return{mime:"image/jpeg",b64:d.split(",")[1],url:d}
+}
+function objWatch(){
+  var n=document.querySelectorAll("#log .m.a").length,t0=Date.now(),last="",iv=setInterval(function(){
+    var ms=$("log").getElementsByClassName("a"),l=ms.length?ms[ms.length-1]:null;
+    if(l&&ms.length>=n&&(l.textContent||"")!==last){last=l.textContent||"";if(XR.on)xrCap("a",last)}
+    if(!XR.on||Date.now()-t0>30000)clearInterval(iv)},600)
+}
+function objAskTap(x,y){
+  var T=objVisible(),best=null,i,ba=1e12;
+  for(i=0;i<T.length;i++){var t=T[i];if(x>=t.x&&x<=t.x+t.w&&y>=t.y&&y<=t.y+t.h&&t.w*t.h<ba){ba=t.w*t.h;best=t}}
+  if(!best)return;OBJ.sel=best.id;OBJ.selT=performance.now();sndPlay("mode");
+  if(!cfg.key){xrCap("a","ADD A BRAIN KEY IN CONFIG SO I CAN LOOK CLOSER");return}
+  if(busy)return;var img=objCrop(best);if(!img)return;
+  xrCap("a","LOOKING CLOSER AT THE "+String(best.l).replace(/_/g," ").toUpperCase()+"…");
+  askPhoto(img,"The on-device detector thinks this is a "+String(best.l).replace(/_/g," ")+". Say exactly what it is, with any detail you can tell (type, brand, colour). One or two short sentences.");objWatch()
+}
+try{$("xr").addEventListener("click",function(e){
+  if(!XR.on||XR.mode!==4)return;if(e.target&&e.target.closest&&e.target.closest("button,.xbtn,.xtop"))return;
+  var r=$("xB").getBoundingClientRect();objAskTap(e.clientX-r.left,e.clientY-r.top)})}catch(e){}
+function objListSay(){
+  var p=objPhrase();
+  if(!OBJ.det){reply(LLs(OBJ.err?"The object detector could not load. Check your internet and try again, Sir.":"The detector is still loading, Sir.","Pengesan masih dimuat, Tuan."));return}
+  reply(p?LLs("I can see "+p+".","Saya nampak "+p+".","I can see "+p+".","I can see "+p+".","I can see "+p+"."):LLs("I do not recognise anything yet, Sir. Point me at something.","Saya belum kenal apa-apa lagi, Tuan. Halakan pada sesuatu."))
+}
+function objIdent(){
+  if(!cfg.key){reply(LLs("Add a brain key in CONFIG so I can see, Sir.","Tambah kunci otak dalam CONFIG supaya saya boleh nampak, Tuan."));return}
+  if(busy)return;
+  if(XR.on){var v=$("xVid");if(v.readyState>=2&&v.videoWidth){var img=drawToJpeg(v,v.videoWidth,v.videoHeight,800);reply(LLs("Looking, Sir.","Saya tengok, Tuan."));askPhoto(img,EYE_Q.id);objWatch();return}}
+  if(eyes.on){eyesAction("id");return}
+  eyes.face="environment";eyesOpen();
+  var n=0,iv=setInterval(function(){n++;var v=$("eyeVid");if(eyes.on&&v&&v.videoWidth>0&&v.readyState>=2){clearInterval(iv);setTimeout(function(){if(eyes.on)eyesAction("id")},700)}else if(n>24)clearInterval(iv)},250)
+}
 function holoIntent(raw,n){
   var w=n.split(" ").length;if(w>14)return null;
   var sk=skyIntent(n);if(sk)return sk;
@@ -5553,7 +5759,6 @@ function holoIntent(raw,n){
   if(new RegExp(JP+"(?:(?:initiate|activate|launch|start|engage) chio(?: intelligence)?|(?:show|open|bring up|display|pull up)(?: me)?(?: my| the)? (?:trading desk|trading view|trade view|trading intelligence|chio intelligence|chio view|chio on (?:the )?globe))$").test(n))return{k:"trade"};
   if(new RegExp(JP+"(?:(?:give me|show me|let me hear|read me|whats|what s|what is) )?(?:my |the |a )?(?:daily |todays |today s |today )?(?:trading|trade|paper|chio) (?:recap|summary|report|review|debrief|briefing|update)(?: for today| of today| today)?$").test(n)||new RegExp(JP+"(?:recap|summarize|summarise|review) (?:my )?(?:trading|trades|paper trading|paper account|portfolio)(?: today| for today)?$").test(n)||new RegExp(JP+"how (?:did|is|are|have) (?:my )?(?:trading|trades|paper trading|paper account|portfolio)(?: go| going| doing| do| been| gone)?(?: today| so far| this week)?$").test(n))return{k:"recap"};
   if(new RegExp(JP+"(?:explain|summarize|summarise|break down|recap|whats happening in|what s happening in|how is|hows|how s) (?:the )?(?:crypto|coin) (?:market|markets)(?: today| right now| now)?$").test(n)||new RegExp(JP+"(?:crypto|coin) market (?:recap|summary|mood|update|overview)$").test(n))return{k:"explain"};
-  if(/^(?:(?:hey |yo |ok |okay )?jarvis,? )?(?:please )?(?:initiate|initialize|initialise|activate|start|launch|begin|engage|run|open|mulakan|aktifkan)(?: the)? (?:southeast|south east|south-east|se|sea|asean) ?(?:asia|asian)? ?(?:intelligence|intel|briefing|mode|sequence|view|overview)?$|^(?:(?:hey |yo |ok |okay )?jarvis,? )?(?:mulakan|aktifkan) (?:risikan|perisikan|intelijen) asia tenggara$/.test(n)&&/\b(intelligence|intel|perisikan|risikan|intelijen|sequence|asean|asia)\b/.test(n))return{k:"sea"};
   if(/^(use|turn on|enable|activate|start|switch on)( my)? (hands?|hand control|hand tracking|gestures?)( control)?$|^(hologram|holo|ar) mode$|^(control|move) (it|the globe) with my hands?$/.test(n))return{k:"ar",on:true};
   if(HG.on&&/^(turn off|disable|stop|switch off)( my)? (hands?|hand control|hand tracking|gestures?)( control)?$|^hands off$/.test(n))return{k:"ar",on:false};
   if(/\b(klcc|petronas|twin towers?|menara berkembar|kuala lumpur city cent(?:re|er))\b/.test(n)&&(/^(show|open|display|bring up|launch|let me see|see|view|tunjuk|papar|take me|fly|go|visit|pull up|hologram|holo|zoom)\b|\bhologram\b/.test(n))&&!/\b(price|prices|stock|share|weather|news|ticket|tickets|opening hours|how tall|how high|history|directions|navigate|waze)\b/.test(n))return{k:"tower",kl:1,part:/sky ?bridge/.test(n)?"bridge":/\b(spire|crown|antenna|pinnacle|observation)\b/.test(n)?"top":"all"};
@@ -5577,6 +5782,12 @@ function holoRun(h){
   if(h.k==="soltime"){solTime(h.r);return}
   if(h.k==="orbs"){hcOpen(true);orbsOpen(true);return}
   if(h.k==="issnext"){issNextSay();return}
+  if(h.k==="objlist"){objListSay();return}
+  if(h.k==="ident"){objIdent();return}
+  if(h.k==="skyar"){if(h.on){hcOpen(true);skyAr(true).then(function(ok){if(ok)skyArSay()})}else{skyAr(false);reply(LLs("AR off, Sir.","AR dimatikan, Tuan."))}return}
+  if(h.k==="mnm"){mnSet(h.on,true);return}
+  if(h.k==="snd"){SND.on=h.on;sv("jv_snd",h.on?"1":"0");if(h.on)sndPlay("alert");reply(h.on?LLs("Sounds on, Sir.","Bunyi dihidupkan, Tuan."):LLs("Sounds muted, Sir.","Bunyi dimatikan, Tuan."));return}
+  if(h.k==="sndtest"){sndPlay("boot");return}
   if(h.k==="sky"){hcOpen(true);skyOpen({tonight:h.tonight});return}
   if(h.k==="skyfind"){skyFind(h.o,true);return}
   if(h.k==="skytog"){skyToggle(h.w,h.on);return}
@@ -5599,7 +5810,6 @@ function holoRun(h){
   if(DK.on&&!/^(desk|deskoff|recap|explain)$/.test(h.k))dkOff(true);
   if(h.k==="close"){hcClose();reply(LT("Globe closed.","Glob ditutup.","地球已关闭。",null,"Глобус закрыт.","地球を閉じました。"));return}
   if(h.k==="ar"){hcOpen();if(h.on){hcAr(true).then(function(ok){if(!ok&&HG.on)reply(LT("I need a tap for the camera. Press the HANDS button on the globe, Sir.","Saya perlu anda tekan butang HANDS pada glob untuk kamera.","请点按地球上的 HANDS 按钮以打开摄像头。",null,"Нажмите кнопку HANDS на глобусе.","地球のHANDSボタンを押してください。"));else if(ok)reply(LT("Hand control online. Pinch or open your hand and move it to spin the globe, Sir.","Kawalan tangan aktif. Cubit atau buka tangan dan gerakkan untuk memutar glob.","手势控制已启动。捏合或张开手并移动即可旋转地球。",null,"Управление руками включено.","ハンドコントロールを起動しました。"))})}else{hcAr(false);reply(LT("Hand control off.","Kawalan tangan dimatikan.","手势控制已关闭。",null,"Управление руками выключено.","ハンドコントロールを停止しました。"))}return}
-  if(h.k==="sea"){hcSea();return}
   if(h.k==="desk"){dkOn(true);return}
   if(h.k==="deskoff"){if(DK.on){dkOff(false);reply(LT("Desk mode off, Sir.","Mod meja dimatikan, Tuan.","桌面模式已关闭，先生。",null,"Режим стола выключен, сэр.","デスクモードをオフにしました、サー。"))}else reply(LT("Desk mode is not running, Sir.","Mod meja tidak berjalan, Tuan.","桌面模式没有运行，先生。",null,"Режим стола не запущен, сэр.","デスクモードは動いていません、サー。"));return}
   if(h.k==="trade"){hcTrade(true);return}
@@ -5671,7 +5881,7 @@ function hcAr(on){
   if(on===HG.ar||HG.arBusy)return Promise.resolve(HG.ar);
   var h=$("holo"),v=$("hVid");
   if(!on){
-    HG.ar=false;h.classList.remove("ar");$("hHands").classList.remove("on");hcCur(null);HG.hands=[];HG.hDrag=null;HG.hZoom=null;HG.zt=0;HG.cur=null;
+    HG.ar=false;SKY.ar=0;h.classList.remove("ar","skar");$("hHands").classList.remove("on");hcCur(null);HG.hands=[];HG.hDrag=null;HG.hZoom=null;HG.zt=0;HG.cur=null;
     if(HG.stream){try{HG.stream.getTracks().forEach(function(t){t.stop()})}catch(e){}HG.stream=null}
     try{v.srcObject=null}catch(e){}
     $("hHint").textContent="DRAG TO SPIN \u00b7 PINCH TO ZOOM \u00b7 TAP A CITY";if(HG.on)hcSize();return Promise.resolve(false)}
@@ -5714,7 +5924,7 @@ function hcFrame(ts){
   if(LITE&&HG.q<1){HG.q=1;HG.n=0;hcSize()}
   if((HG.fr&7)===0){var kw=HG.cv.clientWidth,kh=HG.cv.clientHeight;if(kw>40&&kh>40&&(Math.abs(kw-HG.W)>1||Math.abs(kh-HG.H)>1||Math.abs(HG.cv.width/HG.cv.height-kw/kh)>.01))hcSize()}
   var dt=Math.min(.05,Math.max(.001,(ts-HG.last)/1000));HG.last=ts;
-  if(HG.ar&&gest.lm&&!document.hidden){var hv=$("hVid");if(hv.readyState>=2&&hv.currentTime!==HG.lastT&&ts-HG.lastDet>HG.gap){HG.lastDet=ts;HG.lastT=hv.currentTime;var h0=performance.now();try{hcHands(gest.lm.detectForVideo(hv,h0))}catch(e){}HG.gap=Math.max(50,Math.min(140,(performance.now()-h0)*1.8))}}
+  if(HG.ar&&!SKY.ar&&gest.lm&&!document.hidden){var hv=$("hVid");if(hv.readyState>=2&&hv.currentTime!==HG.lastT&&ts-HG.lastDet>HG.gap){HG.lastDet=ts;HG.lastT=hv.currentTime;var h0=performance.now();try{hcHands(gest.lm.detectForVideo(hv,h0))}catch(e){}HG.gap=Math.max(50,Math.min(140,(performance.now()-h0)*1.8))}}
   if(HG.pl||HG.pt2){var kk=Math.min(1,dt*14);HG.lon+=HG.pl*kk;HG.lat+=HG.pt2*kk;HG.pl*=1-kk;HG.pt2*=1-kk;if(Math.abs(HG.pl)<1e-5)HG.pl=0;if(Math.abs(HG.pt2)<1e-5)HG.pt2=0}
   if(HG.zt)HG.zoom+=(HG.zt-HG.zoom)*Math.min(1,dt*9);
   if(!HG.idl)HG.ema=HG.ema*.93+dt*1000*.07;
@@ -6167,6 +6377,7 @@ function eyesSnapAsk(q){
 var EYE_Q={
   read:"Read out the text you can see, exactly and in order, like reading it aloud to me. If there is a lot, read the most important parts and say briefly what you skipped. No commentary.",
   tr:"Translate any text you can see into English. If it is already English, translate it into Malay. Give the translation first, then one short line on what it is (a sign, a menu, a label).",
+  id:"Identify what is in the middle of this image. Name it, say in one line what it is, and add one useful detail. Keep it under three short sentences.",
   ex:"Explain what this is, what it is for, and anything I should watch out for. Be brief and concrete."
 };
 function eyesHiFrame(){
@@ -6185,7 +6396,7 @@ function eyesAction(k){
   if(!cfg.key){$("eyeCap").textContent="Add a brain key in CONFIG so I can see.";return}
   $("eyeCap").textContent="Hold steady, Sir...";
   var q=EYE_Q[k];
-  (k==="ex"?Promise.resolve(eyesFrame(800)):eyesHiFrame()).then(function(img){
+  (k==="ex"||k==="id"?Promise.resolve(eyesFrame(800)):eyesHiFrame()).then(function(img){
     if(!img){$("eyeCap").textContent="The camera is not ready yet.";return}
     eyes.capT=Date.now();eyes.cap="";askPhoto(img,q);
   });
@@ -7008,7 +7219,7 @@ $("goBtn").addEventListener("click",function(){
     setTimeout(function(){
       B.classList.add("done");
       setTimeout(function(){
-        B.classList.add("out");
+        B.classList.add("out");try{sndPlay("boot")}catch(e){}
         curK=lkey();
         var g=startGreeting(gwv,curK);
         add("a",g);speak(g);
